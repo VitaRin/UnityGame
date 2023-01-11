@@ -1,0 +1,106 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerMovement : MonoBehaviour
+{
+    [SerializeField]
+    private float speed = 4.20f;
+
+    [SerializeField]
+    private float jumpForce = 14f;
+
+    [SerializeField]
+    private LayerMask ground;
+
+    int jumps = 0;
+
+    private enum MovementState { idle, running, jumping, falling, doublejump }
+
+
+    private Rigidbody2D b;
+    private BoxCollider2D col;
+    private Animator anime;
+    private SpriteRenderer sprite;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        b = GetComponent<Rigidbody2D>();
+        col = GetComponent<BoxCollider2D>();
+        anime = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        Vector2 velocity = b.velocity;
+
+        if (Input.GetKey(KeyCode.A))
+        {
+            velocity.x = -speed;
+        }
+        else if (Input.GetKey(KeyCode.D))
+        {
+            velocity.x = speed;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && jumps < 1)
+        {
+            velocity.y = jumpForce;
+            jumps += 1;
+        }
+        if (IsGrounded())
+        {
+            jumps = 0;
+        }
+
+        // if (jumps == 2)
+        // {
+        //     state = MovementState.doublejump;
+        // }
+        
+        b.velocity = velocity;
+        
+        UpdateAnimation();
+
+    }
+
+    private bool IsGrounded()
+    {
+        return Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f, Vector2.down, .1f, ground);
+    }
+
+    private void UpdateAnimation()
+    {
+        MovementState state;
+        float direction = Input.GetAxisRaw("Horizontal");
+
+        if (direction > 0f)
+        {
+            state = MovementState.running;
+            sprite.flipX = false;
+        }
+        else if (direction < 0f)
+        {
+            state = MovementState.running;
+            sprite.flipX = true;
+        }
+        else
+        {
+            state = MovementState.idle;
+        }
+
+        if (b.velocity.y > .1f)
+        {
+            state = MovementState.jumping;
+        }
+        if (b.velocity.y < -.1f)
+        {
+            state = MovementState.falling;
+        }
+
+        anime.SetInteger("State", (int)state);
+    }
+}
