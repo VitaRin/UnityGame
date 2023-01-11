@@ -13,10 +13,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private LayerMask ground;
 
+    [SerializeField]
+    private AudioSource jumpSound;
+
     int jumps = 0;
 
     private enum MovementState { idle, running, jumping, falling, doublejump }
-
 
     private Rigidbody2D player;
     private BoxCollider2D col;
@@ -50,6 +52,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Space) && jumps < 1)
             {
+                jumpSound.Play();
                 velocity.y = jumpForce;
                 jumps += 1;
             }
