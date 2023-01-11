@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     private enum MovementState { idle, running, jumping, falling, doublejump }
 
 
-    private Rigidbody2D b;
+    private Rigidbody2D player;
     private BoxCollider2D col;
     private Animator anime;
     private SpriteRenderer sprite;
@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        b = GetComponent<Rigidbody2D>();
+        player = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         anime = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -35,34 +35,36 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector2 velocity = b.velocity;
+        if (player.bodyType != RigidbodyType2D.Static)
+        {
+            Vector2 velocity = player.velocity;
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            velocity.x = -speed;
-        }
-        else if (Input.GetKey(KeyCode.D))
-        {
-            velocity.x = speed;
-        }
+            if (Input.GetKey(KeyCode.A))
+            {
+                velocity.x = -speed;
+            }
+            else if (Input.GetKey(KeyCode.D))
+            {
+                velocity.x = speed;
+            }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jumps < 1)
-        {
-            velocity.y = jumpForce;
-            jumps += 1;
-        }
-        if (IsGrounded())
-        {
-            jumps = 0;
-        }
-
-        // if (jumps == 2)
-        // {
-        //     state = MovementState.doublejump;
-        // }
+            if (Input.GetKeyDown(KeyCode.Space) && jumps < 1)
+            {
+                velocity.y = jumpForce;
+                jumps += 1;
+            }
+            if (IsGrounded())
+            {
+                jumps = 0;
+            }
         
-        b.velocity = velocity;
-        
+            // if (jumps == 2)
+            // {
+            //     state = MovementState.doublejump;
+            // }
+            
+            player.velocity = velocity;
+        }
         UpdateAnimation();
 
     }
@@ -92,11 +94,11 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.idle;
         }
 
-        if (b.velocity.y > .1f)
+        if (player.velocity.y > .1f)
         {
             state = MovementState.jumping;
         }
-        if (b.velocity.y < -.1f)
+        if (player.velocity.y < -.1f)
         {
             state = MovementState.falling;
         }
