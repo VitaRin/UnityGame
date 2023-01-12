@@ -51,3 +51,6 @@ TagManager:
   - name: Terrain
     uniqueID: 3216513537
     locked: 0
+  - name: Components
+    uniqueID: 1205873385
+    locked: 0

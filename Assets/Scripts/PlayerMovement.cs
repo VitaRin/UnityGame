@@ -60,11 +60,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 jumps = 0;
             }
-        
-            // if (jumps == 2)
-            // {
-            //     state = MovementState.doublejump;
-            // }
             
             player.velocity = velocity;
         }

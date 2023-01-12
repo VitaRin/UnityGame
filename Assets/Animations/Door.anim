@@ -89,9 +89,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.7
-    functionName: DestroyDoor()
+    functionName: DestroyDoor
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: ed203effb6d1ab44cbc2126028984e1f, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

@@ -45,7 +45,7 @@ public class PlayerCollide : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Cherry"))
+        if (collision.gameObject.CompareTag("Cherry"))
         {
             cherrySound.Play();
             Destroy(collision.gameObject);
@@ -63,6 +63,7 @@ public class PlayerCollide : MonoBehaviour
         deathSound.Play();
         player.bodyType = RigidbodyType2D.Static;
         anime.SetTrigger("Death");
+        GlobalControl.Instance.cherries = 0;
     }
 
     private void RestartLevel()

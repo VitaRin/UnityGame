@@ -1,14 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class StickyPlatform : MonoBehaviour
+public class Sign : MonoBehaviour
 {
+    [SerializeField]
+    private Text signText;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player" || collision.gameObject.CompareTag("Cherry"))
+        if (collision.gameObject.name == "Player")
         {
-            collision.gameObject.transform.SetParent(transform);
+            signText.text = "Freefall ->";
         }
     }
 
@@ -16,8 +20,7 @@ public class StickyPlatform : MonoBehaviour
     {
         if (collision.gameObject.name == "Player")
         {
-            collision.gameObject.transform.SetParent(null);
+            signText.text = "";
         }
     }
-
 }
