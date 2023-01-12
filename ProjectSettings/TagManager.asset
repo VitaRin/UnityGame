@@ -8,6 +8,9 @@ TagManager:
   - Trap
   - Door
   - Key
+  - Computer
+  - Gate
+  - Exit trigger
   layers:
   - Default
   - TransparentFX

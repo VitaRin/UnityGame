@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private enum MovementState { idle, running, jumping, falling, doublejump }
 
-    private Rigidbody2D player;
+    private Rigidbody2D rb;
     private BoxCollider2D col;
     private Animator anime;
     private SpriteRenderer sprite;
@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GetComponent<Rigidbody2D>();
+        rb = GetComponent<Rigidbody2D>();
         col = GetComponent<BoxCollider2D>();
         anime = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
@@ -37,9 +37,9 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.bodyType != RigidbodyType2D.Static)
+        if (rb.bodyType != RigidbodyType2D.Static)
         {
-            Vector2 velocity = player.velocity;
+            Vector2 velocity = rb.velocity;
 
             if (Input.GetKey(KeyCode.A))
             {
@@ -61,7 +61,7 @@ public class PlayerMovement : MonoBehaviour
                 jumps = 0;
             }
             
-            player.velocity = velocity;
+            rb.velocity = velocity;
         }
         UpdateAnimation();
 
@@ -92,11 +92,11 @@ public class PlayerMovement : MonoBehaviour
             state = MovementState.idle;
         }
 
-        if (player.velocity.y > .1f)
+        if (rb.velocity.y > .1f)
         {
             state = MovementState.jumping;
         }
-        if (player.velocity.y < -.1f)
+        if (rb.velocity.y < -.1f)
         {
             state = MovementState.falling;
         }

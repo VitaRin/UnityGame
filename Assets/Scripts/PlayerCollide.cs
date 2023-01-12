@@ -16,9 +16,24 @@ public class PlayerCollide : MonoBehaviour
     private Text pointsText;
 
     [SerializeField]
-    private AudioSource cherrySound;   
+    private Text computerText;
+
+    [SerializeField]
+    private AudioSource cherrySound;  
+
+    [SerializeField]
+    private AudioSource keySound; 
+
+    [SerializeField]
+    private AudioSource computerSound; 
     
     public bool hasKey = false;
+
+    public bool keyPressed = false;
+
+    private Finish finish;
+
+    public Computer computer;
 
     // Start is called before the first frame update
     void Start()
@@ -40,7 +55,39 @@ public class PlayerCollide : MonoBehaviour
             GlobalControl.Instance.HP--;
             Die();
         }
+
+        //  if (collision.gameObject.CompareTag("Computer"))
+        //  {
+        //      computerText.text = "Press X to turn off the gate.";
+
+        //      if (Input.GetKeyDown(KeyCode.X))
+        //      {
+        //          computerSound.Play();
+        //          Destroy(GameObject.FindGameObjectWithTag("Gate"));
+        //          computerText.text = "Gate has been unlocked.";
+        //          finish.levelComplete = true;
+        //      }
+        //  }
         
+    }
+
+    //  private void OnCollisionExit2D(Collision2D collision)
+    //  {
+    //      if (collision.gameObject.CompareTag("Computer"))
+    //      {
+    //          computerText.text = "";
+    //     }
+    // }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Computer"))
+        {
+            if (Input.GetKey(KeyCode.X))
+            {
+                computer.Unlock();
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,6 +100,7 @@ public class PlayerCollide : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Key"))
         {
+            keySound.Play();
             Destroy(collision.gameObject);
             hasKey = true;
         }
