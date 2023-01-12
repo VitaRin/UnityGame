@@ -7,17 +7,17 @@ public class Finish : MonoBehaviour
 {
     [SerializeField]
     private AudioSource endSound;
-    public bool levelComplete;
+    public bool levelComplete = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        endSound = GetComponent<AudioSource>();
+        // endSound = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player" && !levelComplete)
+        if (collision.gameObject.name == "Player" && levelComplete)
         {
             endSound.Play();
             levelComplete = true;
