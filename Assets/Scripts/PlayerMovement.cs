@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     int jumps = 0;
 
-    private enum MovementState { idle, running, jumping, falling, doublejump }
+    private enum MovementState { idle, running, jumping, falling }
 
     private Rigidbody2D rb;
     private BoxCollider2D col;
@@ -64,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = velocity;
         }
         UpdateAnimation();
-
     }
 
     private bool IsGrounded()
