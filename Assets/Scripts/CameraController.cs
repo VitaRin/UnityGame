@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private Transform player; 
+    [SerializeField] 
+    private Transform player; 
 
-    // Update is called once per frame
+    [SerializeField]
+    private AudioReverbFilter audioReverb;
+
+    public bool reverbEnabled = false;
+
     void Update()
     {
-        transform.position = new Vector3(player.position.x, player.position.y,
-            transform.position.z);
+        transform.position = new Vector3(player.position.x, player.position.y, transform.position.z);
+    }
+
+    public void ToggleReverb()
+    {
+        audioReverb.enabled = !reverbEnabled;
     }
 }

@@ -30,19 +30,19 @@ public class PlayerCollide : MonoBehaviour
     public bool hasKey = false;
 
     public bool keyPressed = false;
-
-    private Finish finish;
+    
+    public bool reverbEnabled = false;
 
     public Computer computer;
 
-    // Start is called before the first frame update
+    public CameraController cameraController;
+
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
         anime = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         pointsText.text = "Cherries: " + GlobalControl.Instance.cherries;
@@ -55,29 +55,7 @@ public class PlayerCollide : MonoBehaviour
             GlobalControl.Instance.HP--;
             Die();
         }
-
-        //  if (collision.gameObject.CompareTag("Computer"))
-        //  {
-        //      computerText.text = "Press X to turn off the gate.";
-
-        //      if (Input.GetKeyDown(KeyCode.X))
-        //      {
-        //          computerSound.Play();
-        //          Destroy(GameObject.FindGameObjectWithTag("Gate"));
-        //          computerText.text = "Gate has been unlocked.";
-        //          finish.levelComplete = true;
-        //      }
-        //  }
-        
     }
-
-    //  private void OnCollisionExit2D(Collision2D collision)
-    //  {
-    //      if (collision.gameObject.CompareTag("Computer"))
-    //      {
-    //          computerText.text = "";
-    //     }
-    // }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -103,6 +81,13 @@ public class PlayerCollide : MonoBehaviour
             keySound.Play();
             Destroy(collision.gameObject);
             hasKey = true;
+        }
+        if (collision.gameObject.CompareTag("Freefall"))
+        {
+            player.mass = 5f;
+            player.gravityScale = 3.7f;
+            cameraController.ToggleReverb();
+            Invoke("Die", 3f);
         }
     }
 

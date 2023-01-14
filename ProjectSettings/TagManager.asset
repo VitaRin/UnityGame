@@ -11,6 +11,7 @@ TagManager:
   - Computer
   - Gate
   - Exit trigger
+  - Freefall
   layers:
   - Default
   - TransparentFX
@@ -45,6 +46,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background 2
+    uniqueID: 1205873385
+    locked: 0
   - name: Background
     uniqueID: 558810021
     locked: 0
@@ -53,7 +57,4 @@ TagManager:
     locked: 0
   - name: Terrain
     uniqueID: 3216513537
-    locked: 0
-  - name: Components
-    uniqueID: 1205873385
     locked: 0

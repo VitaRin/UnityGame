@@ -25,6 +25,7 @@ public class Computer : MonoBehaviour
     {
         computerSound.Play();
         Destroy(GameObject.FindGameObjectWithTag("Gate"));
+        Destroy(GameObject.FindGameObjectWithTag("Block"));
         computerText.text = "Gate has been unlocked.";
         finish.levelComplete = true;
     }
