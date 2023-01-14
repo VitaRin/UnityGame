@@ -12,6 +12,7 @@ TagManager:
   - Gate
   - Exit trigger
   - Freefall
+  - Block
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D col;
     private Animator anime;
     private SpriteRenderer sprite;
+    public Knockback knockback;
 
     // Start is called before the first frame update
     void Start()
@@ -37,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (player.bodyType != RigidbodyType2D.Static)
+        if (player.bodyType != RigidbodyType2D.Static && knockback.beingKnockedDown == false)
         {
             Vector2 velocity = player.velocity;
 
@@ -68,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool IsGrounded()
     {
+
         return Physics2D.BoxCast(col.bounds.center, col.bounds.size, 0f, Vector2.down, .1f, ground);
     }
 

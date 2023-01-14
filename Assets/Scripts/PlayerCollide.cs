@@ -30,12 +30,12 @@ public class PlayerCollide : MonoBehaviour
     public bool hasKey = false;
 
     public bool keyPressed = false;
-    
-    public bool reverbEnabled = false;
 
     public Computer computer;
 
     public CameraController cameraController;
+
+    public Knockback knockback;
 
     void Start()
     {
@@ -50,10 +50,24 @@ public class PlayerCollide : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Trap"))
+        if (collision.gameObject.CompareTag("Trap"))
         {
             GlobalControl.Instance.HP--;
+
+            // anime.SetTrigger("Hit");
+
+            // Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 1.3f);
+            // knockback.Feedback(direction, 7f);
+            // anime.SetInteger("State", 0);
             Die();
+        }
+
+        if (collision.gameObject.CompareTag("Gate"))
+        {
+            anime.SetTrigger("Hit");
+            Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 0.7f);
+            knockback.Feedback(direction, 8f);
+            anime.SetInteger("State", 0);
         }
     }
 
@@ -85,11 +99,23 @@ public class PlayerCollide : MonoBehaviour
         if (collision.gameObject.CompareTag("Freefall"))
         {
             player.mass = 5f;
-            player.gravityScale = 3.7f;
+            player.gravityScale = 3.72f;
             cameraController.ToggleReverb();
             Invoke("Die", 3f);
         }
     }
+
+    // private IEnumerator Knockback(float knockbackDuration, float knockbackPower, Vector3 direction) {
+    //     float timer = 0;
+
+    //     while (knockbackDuration > timer)
+    //     {
+    //         timer += Time.deltaTime;
+    //         player.AddForce(direction);
+    //     }
+
+    //     yield return 0;
+    // }
 
     private void Die()
     {
