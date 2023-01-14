@@ -8,26 +8,54 @@ public class EnemyPatrol : MonoBehaviour
     private GameObject[] waypoints;
 
     [SerializeField]
-    private float speed = 3f;
+    private float speed = 1f;
 
     private int currentWaypointIndex = 0;
 
+    private float startWaitTime = 3f;
+
+    private float waitTime;
+
     public EnemyAI enemyAI;
 
-    // Update is called once per frame
+
+    void Start()
+    {
+        waitTime = startWaitTime;
+        
+    }
+
     void Update()
     {
         if (enemyAI.PlayerSpotted() == false)
         {
+                               
             if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
-            {
-                currentWaypointIndex++;
-                if (currentWaypointIndex >= waypoints.Length)
+            {   
+                if (waitTime <= 0)
                 {
-                    currentWaypointIndex = 0;
+                    currentWaypointIndex++;
+                    waitTime = startWaitTime;
+
+                    if (currentWaypointIndex >= waypoints.Length)
+                    {
+                        currentWaypointIndex = 0;
+                    }
                 }
+                else
+                {
+                    waitTime -= Time.deltaTime;
+                }
+
             }
-            transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+            else 
+            {
+                transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
+            }   
         }
+
+        enemyAI.AnimationUpdate();
+
     }
+
 }

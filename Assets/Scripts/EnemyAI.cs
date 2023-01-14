@@ -5,9 +5,6 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
-    private float speed = 3f;
-
-    [SerializeField]
     private float sightRange = 3f;
 
     [SerializeField]
@@ -26,34 +23,48 @@ public class EnemyAI : MonoBehaviour
 
     private bool playerInAttackRange = false;
 
-    public bool attackMode = false;
+    public bool playerSpotted = false;
+    
+    private Animator anime;
 
-    // Start is called before the first frame update
+    private Rigidbody2D enemy;
+
+    private SpriteRenderer sprite;
+    
+    private Vector2 currentPosition;
+
+    private bool facingRight = true;
+
+    // private float facingWay;
+
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;    
+        enemy = GetComponent<Rigidbody2D>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        anime = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
+        currentPosition = enemy.transform.position;
         distance = Vector2.Distance(player.transform.position, transform.position);
-        Debug.Log(distance);
+        //Debug.Log(distance);
 
         if (distance < sightRange)
         {
-            // playerInRange = true;
+            
             // Vector2 shoot = new Vector2(transform.position.x - 1f, transform.position.y);
             // RaycastHit2D hit = Physics2D.Raycast(shoot, player.transform.position, sightRange);
             // if (hit.collider != null)
             // {
             //     Debug.DrawLine(transform.position, hit.point, Color.red);
             // }
-            attackMode = true;
+            playerSpotted = true;
         }
         else 
         {
-            attackMode = false;
+            playerSpotted = false;
         }
     
         // else if (distance > -30f)
@@ -81,16 +92,45 @@ public class EnemyAI : MonoBehaviour
         // {
         //     transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         // }
+        //AnimationUpdate();
     }
 
     private void DetectPlayer()
     {
-
+        // Vector2 shoot = new Vector2(transform.position.x - 1f, transform.position.y);
+            // RaycastHit2D hit = Physics2D.Raycast(shoot, player.transform.position, sightRange);
+            // if (hit.collider != null)
+            // {
+            //     Debug.DrawLine(transform.position, hit.point, Color.red);
+            // }
     }
-    
+
     public bool PlayerSpotted()
     {
-        return attackMode;
+        return playerSpotted;
+    }
+
+    public void AnimationUpdate()
+    {
+        bool idle;
+        float xDiff = enemy.transform.position.x - currentPosition.x;
+
+        if (xDiff > 0f)
+        {
+            idle = false;
+            sprite.flipX = false;
+        }
+        else if (xDiff < 0f)
+        {
+            idle = false;
+            sprite.flipX = true;
+        }
+        else
+        {
+            idle = true;
+        }
+
+        anime.SetBool("Idle", idle);
     }
 }
 
