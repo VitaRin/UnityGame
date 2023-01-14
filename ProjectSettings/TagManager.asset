@@ -13,6 +13,7 @@ TagManager:
   - Exit trigger
   - Freefall
   - Block
+  - Enemy
   layers:
   - Default
   - TransparentFX
