@@ -26,6 +26,9 @@ public class PlayerCollide : MonoBehaviour
 
     [SerializeField]
     private AudioSource computerSound; 
+
+    [SerializeField]
+    private AudioSource zappedSound; 
     
     public bool hasKey = false;
 
@@ -64,10 +67,11 @@ public class PlayerCollide : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Gate"))
         {
-            anime.SetTrigger("Hit");
+            zappedSound.Play();
+            //anime.SetTrigger("Hit");
             Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 0.7f);
             knockback.Feedback(direction, 8f);
-            anime.SetInteger("State", 0);
+            //anime.SetInteger("State", 0);
         }
     }
 
