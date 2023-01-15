@@ -24584,9 +24584,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0063638687, y: 0.0031819344}
+  m_Offset: {x: 0, y: 0.0031819344}
   serializedVersion: 2
-  m_Radius: 1.1588621
+  m_Radius: 1.331686
 --- !u!1 &1168047950
 GameObject:
   m_ObjectHideFlags: 0
@@ -49982,7 +49982,6 @@ MonoBehaviour:
   waypoints:
   - {fileID: 1838028647}
   - {fileID: 157923557}
-  speed: 3.3
   enemyAI: {fileID: 1238578714}
 --- !u!114 &1238578717
 MonoBehaviour:

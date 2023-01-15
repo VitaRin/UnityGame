@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyAI : MonoBehaviour
 {   
@@ -24,7 +25,8 @@ public class EnemyAI : MonoBehaviour
 
     private bool facingRight = true;
 
-    // private float facingWay;
+    [SerializeField]
+    private AIPath aiPath;
 
     void Start()
     {
@@ -37,7 +39,6 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         currentPosition = transform.position;
-        //AnimationUpdate();
     }
 
     public bool DetectPlayer()
@@ -54,7 +55,6 @@ public class EnemyAI : MonoBehaviour
             
             if (hit.collider != null && hit.collider.tag == "Player")
             {   
-                //Debug.Log(hit.collider);
                 Debug.DrawLine(transform.position, hit.point, Color.red);
                 return true;
             }
@@ -65,15 +65,14 @@ public class EnemyAI : MonoBehaviour
     public void AnimationUpdate()
     {
         bool idle;
-        float xDiff = transform.position.x - currentPosition.x;
 
-        if (xDiff > 0f)
+        if (aiPath.desiredVelocity.x >= 0.01f)
         {
             idle = false;
             sprite.flipX = false;
             facingRight = true;
         }
-        else if (xDiff < 0f)
+        else if (aiPath.desiredVelocity.x <= -0.01f)
         {
             idle = false;
             sprite.flipX = true;
