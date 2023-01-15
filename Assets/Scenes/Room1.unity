@@ -143,7 +143,7 @@ GameObject:
   m_Component:
   - component: {fileID: 40881830}
   - component: {fileID: 40881831}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 157923558}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -321,7 +321,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157923557}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2, z: 0}
+  m_LocalPosition: {x: -2.56, y: -1.984999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -339,7 +339,7 @@ GameObject:
   - component: {fileID: 234865066}
   - component: {fileID: 234865065}
   - component: {fileID: 234865064}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EventSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 268947369}
   - component: {fileID: 268947371}
   - component: {fileID: 268947370}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22413,7 +22413,7 @@ Transform:
   - {fileID: 1838028648}
   - {fileID: 157923558}
   m_Father: {fileID: 0}
-  m_RootOrder: 20
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &325895421
 PrefabInstance:
@@ -22531,6 +22531,10 @@ PrefabInstance:
     - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
       propertyPath: m_Name
       value: Cherry (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -22862,7 +22866,7 @@ GameObject:
   - component: {fileID: 519420033}
   - component: {fileID: 519420029}
   - component: {fileID: 519420034}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Main Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -23037,6 +23041,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -23068,7 +23076,7 @@ GameObject:
   m_Component:
   - component: {fileID: 677001222}
   - component: {fileID: 677001223}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23151,7 +23159,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 709009894}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -23183,7 +23191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 727038261}
   - component: {fileID: 727038262}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23332,7 +23340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 831358161}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -23413,7 +23421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 924769018}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -23445,7 +23453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 953392003}
   - component: {fileID: 953392002}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: GameMaster
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23584,7 +23592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1017363518}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint2
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -24030,27 +24038,31 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 1703329126}
     m_Modifications:
     - target: {fileID: 5264623042398667051, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 5264623042398667051, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.2854347
+      value: 0.46420014
       objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.4231098
+      value: -2.2471335
       objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.12974274
+      value: 0.25948548
       objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24095,7 +24107,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1081642216}
   - component: {fileID: 1081642215}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Music
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24223,7 +24235,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1112106903}
   - component: {fileID: 1112106904}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -24459,7 +24471,7 @@ GameObject:
   - component: {fileID: 1168047951}
   - component: {fileID: 1168047953}
   - component: {fileID: 1168047952}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49584,7 +49596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1226693753}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint1
   m_TagString: Untagged
   m_Icon: {fileID: 6519382022992737161, guid: 0000000000000000d000000000000000, type: 0}
@@ -49622,7 +49634,7 @@ GameObject:
   - component: {fileID: 1238578717}
   - component: {fileID: 1238578716}
   - component: {fileID: 1238578718}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyAI
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -49689,7 +49701,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1238578709}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.56, y: -1.77, z: 0}
+  m_LocalPosition: {x: -3.82, y: -1.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49722,7 +49734,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1238578714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -49738,6 +49750,9 @@ MonoBehaviour:
   sightRange: 5.82
   minDistance: 0
   attackRange: 0
+  rayLayer:
+    serializedVersion: 2
+    m_Bits: 1
   playerSpotted: 0
 --- !u!61 &1238578715
 BoxCollider2D:
@@ -49848,7 +49863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1344217483}
   - component: {fileID: 1344217484}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49932,7 +49947,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1371558106}
   - component: {fileID: 1371558107}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -50208,6 +50223,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -50329,7 +50348,7 @@ GameObject:
   - component: {fileID: 1434659443}
   - component: {fileID: 1434659442}
   - component: {fileID: 1434659441}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Freefall check
   m_TagString: Freefall
   m_Icon: {fileID: 0}
@@ -50446,7 +50465,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1511423737
 GameObject:
@@ -95008,11 +95027,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+--- !u!4 &1555395374 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
+  m_PrefabInstance: {fileID: 1074843955}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1577761832
 GameObject:
   m_ObjectHideFlags: 0
@@ -95022,7 +95050,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577761833}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 2
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -95095,6 +95123,7 @@ Transform:
   - {fileID: 438686777}
   - {fileID: 828184558}
   - {fileID: 1044748500}
+  - {fileID: 1555395374}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -95447,7 +95476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1838028648}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Waypoint 1
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -95462,7 +95491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1838028647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.98, y: -2, z: 0}
+  m_LocalPosition: {x: -8.47, y: -1.984999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -95525,6 +95554,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -95579,7 +95612,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1920006622}
   - component: {fileID: 1920006623}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95696,7 +95729,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1961521855}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Background Forest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -95737,7 +95770,7 @@ GameObject:
   - component: {fileID: 2004587017}
   - component: {fileID: 2004587016}
   - component: {fileID: 2004587015}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: Block
   m_TagString: Block
   m_Icon: {fileID: 0}
@@ -95829,7 +95862,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 17
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2033286242
 GameObject:
@@ -95987,7 +96020,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2064405758}
   - component: {fileID: 2064405759}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Layer 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -96117,6 +96150,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cherry (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -96136,7 +96173,7 @@ PrefabInstance:
       objectReference: {fileID: 1062346534}
     - target: {fileID: 1379723000830317185, guid: 400bd5c389c88a1428d65251b3727629, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 1379723000830317185, guid: 400bd5c389c88a1428d65251b3727629, type: 3}
       propertyPath: m_LocalPosition.x
@@ -96181,6 +96218,10 @@ PrefabInstance:
     - target: {fileID: 1379723000830317187, guid: 400bd5c389c88a1428d65251b3727629, type: 3}
       propertyPath: m_Name
       value: Sign
+      objectReference: {fileID: 0}
+    - target: {fileID: 1379723000830317187, guid: 400bd5c389c88a1428d65251b3727629, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -96536,6 +96577,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Key
       objectReference: {fileID: 0}
+    - target: {fileID: 5264623042398667051, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 5264623042398667054, guid: 24f13fa5fd167014aa3dd7191449a893, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -96775,6 +96820,10 @@ PrefabInstance:
     - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
       propertyPath: m_Name
       value: Cherry
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696412882804925845, guid: 8866c0c9f0e079a4cb19faf3ce598ce0, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

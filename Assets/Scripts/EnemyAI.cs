@@ -5,13 +5,16 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
-    private float sightRange = 3f;
+    private float sightRange = 6f;
 
     [SerializeField]
     private float minDistance;
 
     [SerializeField]
     private float attackRange;
+
+    [SerializeField]
+    private LayerMask rayLayer;
     
     private Transform player;
 
@@ -47,62 +50,34 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentPosition = enemy.transform.position;
+        currentPosition = transform.position;
         distance = Vector2.Distance(player.transform.position, transform.position);
-        //Debug.Log(distance);
 
-        if (distance < sightRange)
-        {
-            
-            // Vector2 shoot = new Vector2(transform.position.x - 1f, transform.position.y);
-            // RaycastHit2D hit = Physics2D.Raycast(shoot, player.transform.position, sightRange);
-            // if (hit.collider != null)
-            // {
-            //     Debug.DrawLine(transform.position, hit.point, Color.red);
-            // }
-            playerSpotted = true;
-        }
-        else 
-        {
-            playerSpotted = false;
-        }
-    
-        // else if (distance > -30f)
-        // {
-        //     playerInRange = true;
-        //     Vector2 shoot = new Vector2(transform.position.x - 1f, transform.position.y);
-        //     RaycastHit2D hit = Physics2D.Raycast(shoot, player.transform.position, sight);
-        //     if (hit.collider != null)
-        //     {
-        //         Debug.DrawLine(transform.position, hit.point, Color.red);
-        //     }
-        //}
-
-        //RaycastHit2D hit = Physics2D.Raycast(transform.position, player.transform.position, sight);
-        // if (hit.collider != null)
-        // {
-        //     Debug.DrawLine(transform.position, hit.point, Color.red);
-        // }
-        // float distanceFromPlayer = Vector2.Distance(player.position, transform.position);
-        // if (distanceFromPlayer > sight)
-        // {
-            
-        // }
-        // else if (distanceFromPlayer < sight && distanceFromPlayer > minDistance)
-        // {
-        //     transform.position = Vector2.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
-        // }
-        //AnimationUpdate();
+        playerSpotted = DetectPlayer();
     }
 
-    private void DetectPlayer()
+    private bool DetectPlayer()
     {
-        // Vector2 shoot = new Vector2(transform.position.x - 1f, transform.position.y);
-            // RaycastHit2D hit = Physics2D.Raycast(shoot, player.transform.position, sightRange);
-            // if (hit.collider != null)
-            // {
-            //     Debug.DrawLine(transform.position, hit.point, Color.red);
-            // }
+        if (player.position.x - transform.position.x > 0 && facingRight || player.position.x - transform.position.x < 0 && !facingRight)
+        {
+            Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
+
+            Vector2 target = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y -0.5f);
+
+            
+            
+            RaycastHit2D hit = Physics2D.Raycast(source, target, sightRange);
+
+            //Debug.Log(hit.point);
+            
+            if (hit.collider != null && hit.collider.tag == "Player")
+            {   
+                Debug.Log(hit.collider);
+                Debug.DrawLine(transform.position, hit.point, Color.red);
+                return true;
+            }
+        }
+        return false;
     }
 
     public bool PlayerSpotted()
@@ -113,17 +88,19 @@ public class EnemyAI : MonoBehaviour
     public void AnimationUpdate()
     {
         bool idle;
-        float xDiff = enemy.transform.position.x - currentPosition.x;
+        float xDiff = transform.position.x - currentPosition.x;
 
         if (xDiff > 0f)
         {
             idle = false;
             sprite.flipX = false;
+            facingRight = true;
         }
         else if (xDiff < 0f)
         {
             idle = false;
             sprite.flipX = true;
+            facingRight = false;
         }
         else
         {
