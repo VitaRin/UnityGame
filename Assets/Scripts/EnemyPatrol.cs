@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Pathfinding;
 
 public class EnemyPatrol : MonoBehaviour
 {
@@ -8,54 +9,137 @@ public class EnemyPatrol : MonoBehaviour
     private GameObject[] waypoints;
 
     [SerializeField]
-    private float speed = 1f;
+    private float speed = 3f;
 
     private int currentWaypointIndex = 0;
 
-    private float startWaitTime = 3f;
+    private int currentWaypoint = 0;
+
+    private float nextWaypointDistance = 0.5f;
+
+    private bool reachedEnd = false;
+
+    private bool waiting = false;
+
+    private float startWaitTime = 1f;
 
     private float waitTime;
 
     public EnemyAI enemyAI;
 
+    private Seeker seeker;
+
+    private Path path;
+
+    private Rigidbody2D enemy;
+
+    private AIDestinationSetter destinationSetter;
+
+    private Transform target;
+
 
     void Start()
     {
         waitTime = startWaitTime;
+        seeker = GetComponent<Seeker>();
+        enemy = GetComponent<Rigidbody2D>();
+        destinationSetter = GetComponent<AIDestinationSetter>();
+        target = waypoints[currentWaypointIndex].transform;
+
+        
+        //seeker.StartPath(transform.position, target.position, OnPathComplete);
         
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        if (enemyAI.PlayerSpotted() == false)
+        if (enemyAI.DetectPlayer() == false)
         {
-                               
-            if (Vector2.Distance(waypoints[currentWaypointIndex].transform.position, transform.position) < .1f)
-            {   
-                if (waitTime <= 0)
-                {
-                    currentWaypointIndex++;
-                    waitTime = startWaitTime;
+            //if (waiting == false)
+            //{
+            Invoke("UpdatePath", 0f);
+                // if (reachedEnd == true)
+                // {
+                //     return;
+                // }
+                
+            //}
+            
 
-                    if (currentWaypointIndex >= waypoints.Length)
-                    {
-                        currentWaypointIndex = 0;
-                    }
-                }
+            if (path != null)
+            {
+                // Debug.Log(currentWaypoint);
+                // Debug.Log(path.vectorPath.Count);
+                int totalWaypoints = path.vectorPath.Count;
+                if (currentWaypoint >= totalWaypoints)
+                {
+                    reachedEnd = true;
+                    return;
+                } 
                 else
                 {
-                    waitTime -= Time.deltaTime;
+                    reachedEnd = false;
                 }
+                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - enemy.position).normalized;
 
+                float distance = Vector2.Distance(enemy.position, path.vectorPath[currentWaypointIndex]);
+                if (distance < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
             }
-            else 
+            else
             {
-                transform.position = Vector2.MoveTowards(transform.position, waypoints[currentWaypointIndex].transform.position, Time.deltaTime * speed);
-            }   
+                return;
+            }
+            
         }
 
         enemyAI.AnimationUpdate();
 
     }
+
+    void UpdatePath()
+    {
+        destinationSetter.target = waypoints[currentWaypointIndex].transform;
+        target = destinationSetter.target;
+
+        if (seeker.IsDone())
+        {
+            //reachedEnd = true;
+            seeker.StartPath(enemy.position, target.position, OnPathComplete);
+        }
+    }
+
+    void OnPathComplete(Path p)
+    {
+        if (!p.error)
+        {
+            
+            if (waitTime <= 0)
+            {
+                currentWaypointIndex++;
+                waitTime = startWaitTime;
+                waiting = false;
+
+                if (currentWaypointIndex >= waypoints.Length)
+                {
+                    currentWaypointIndex = 0;
+                }
+                
+            }
+            else
+            {
+                waitTime -= Time.deltaTime;
+                waiting = true;
+                // Debug.Log(waitTime);
+            }
+            path = p;
+            currentWaypoint = 0;
+        }
+        
+    }
+
+    
 
 }

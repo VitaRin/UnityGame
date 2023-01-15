@@ -5,26 +5,12 @@ using UnityEngine;
 public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
-    private float sightRange = 6f;
-
-    [SerializeField]
-    private float minDistance;
-
-    [SerializeField]
-    private float attackRange;
+    private float sightRange = 1f;
 
     [SerializeField]
     private LayerMask rayLayer;
     
     private Transform player;
-
-    private float distance;
-
-    private bool seePlayer = false;
-
-    private bool playerInRange = false;
-
-    private bool playerInAttackRange = false;
 
     public bool playerSpotted = false;
     
@@ -51,12 +37,10 @@ public class EnemyAI : MonoBehaviour
     void FixedUpdate()
     {
         currentPosition = transform.position;
-        distance = Vector2.Distance(player.transform.position, transform.position);
-
-        playerSpotted = DetectPlayer();
+        //AnimationUpdate();
     }
 
-    private bool DetectPlayer()
+    public bool DetectPlayer()
     {
         if (player.position.x - transform.position.x > 0 && facingRight || player.position.x - transform.position.x < 0 && !facingRight)
         {
@@ -67,22 +51,15 @@ public class EnemyAI : MonoBehaviour
             
             
             RaycastHit2D hit = Physics2D.Raycast(source, target, sightRange);
-
-            //Debug.Log(hit.point);
             
             if (hit.collider != null && hit.collider.tag == "Player")
             {   
-                Debug.Log(hit.collider);
+                //Debug.Log(hit.collider);
                 Debug.DrawLine(transform.position, hit.point, Color.red);
                 return true;
             }
         }
         return false;
-    }
-
-    public bool PlayerSpotted()
-    {
-        return playerSpotted;
     }
 
     public void AnimationUpdate()
