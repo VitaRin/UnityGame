@@ -62,7 +62,6 @@ public class PlayerCollide : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-
             Die();
         }
 

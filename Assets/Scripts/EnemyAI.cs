@@ -28,6 +28,9 @@ public class EnemyAI : MonoBehaviour
     [SerializeField]
     public EnemyAttack enemyAttack;
 
+    [SerializeField]
+    private AudioSource deathSound;
+
     void Start()
     {
         enemy = GetComponent<Rigidbody2D>();
@@ -48,6 +51,14 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Trap"))
+        {
+            Die();
+        }
+    }
+
     private bool DetectPlayer()
     {
         if ((player.position.x - transform.position.x) > 0 && facingRight || (player.position.x - transform.position.x) < 0 && !facingRight)
@@ -62,7 +73,6 @@ public class EnemyAI : MonoBehaviour
             
             if (hit.collider != null && hit.collider.tag == "Player")
             {   
-                //Debug.DrawLine(transform.position, hit.point, Color.red);
                 enemyAttack.onSight = true;
                 return true;
             }
@@ -73,8 +83,6 @@ public class EnemyAI : MonoBehaviour
     public void AnimationUpdate()
     {
         bool idle;
-
-        //Debug.Log(enemy.velocity);
 
         if (enemy.velocity.x >= 0.05f)
         {
@@ -94,6 +102,17 @@ public class EnemyAI : MonoBehaviour
         }
 
         anime.SetBool("Idle", idle);
+    }
+
+    private void Die()
+    {
+        deathSound.Play();
+        anime.SetTrigger("Enemy Death");
+    }
+
+    private void DeleteEnemy()
+    {
+        Destroy(gameObject);
     }
 }
 
