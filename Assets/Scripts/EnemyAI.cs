@@ -7,6 +7,15 @@ public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
     private float sightRange = 5f;
+
+    [SerializeField]
+    private EnemyPatrol enemyPatrol;
+
+    [SerializeField]
+    public EnemyAttack enemyAttack;
+
+    [SerializeField]
+    private AudioSource deathSound;
     
     private Transform player;
 
@@ -20,16 +29,7 @@ public class EnemyAI : MonoBehaviour
     
     private Vector2 currentPosition;
 
-    public bool facingRight = true;
-
-    [SerializeField]
-    private EnemyPatrol enemyPatrol;
-
-    [SerializeField]
-    public EnemyAttack enemyAttack;
-
-    [SerializeField]
-    private AudioSource deathSound;
+    public bool facingRight = true;    
 
     void Start()
     {

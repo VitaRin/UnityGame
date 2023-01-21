@@ -26,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer sprite;
     public Knockback knockback;
 
-    // Start is called before the first frame update
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -35,7 +34,6 @@ public class PlayerMovement : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.bodyType != RigidbodyType2D.Static && knockback.beingKnockedDown == false)

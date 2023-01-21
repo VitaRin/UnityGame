@@ -6,7 +6,6 @@ public class GlobalControl : MonoBehaviour
 {
     public static GlobalControl Instance;
 
-    public int HP;
     public int cherries;
 
     void Awake ()   

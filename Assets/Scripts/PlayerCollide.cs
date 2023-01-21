@@ -10,13 +10,13 @@ public class PlayerCollide : MonoBehaviour
     private Animator anime;
 
     [SerializeField]
-    private AudioSource deathSound;
-
-    [SerializeField]
     private Text pointsText;
 
     [SerializeField]
     private Text computerText;
+
+    [SerializeField]
+    private AudioSource deathSound;
 
     [SerializeField]
     private AudioSource cherrySound;  

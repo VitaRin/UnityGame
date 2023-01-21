@@ -13,11 +13,22 @@ public class EnemyAttack : MonoBehaviour
     public EnemyAI enemyAI;
 
     [SerializeField]
+    private GameObject fireball;
+
+    [SerializeField]
+    private Transform firepoint;
+
+    [SerializeField]
+    private LayerMask wall;
+
+    [SerializeField]
+    private AudioSource fireSound;
+
+    [SerializeField]
     private float speed = 3f;
 
     public float nextWaypointDistance = 3f;
     public float jumpRequirement = 0.8f;
-    public float jumpModifier = 0.3f;
     public float jumpCheckOffset = 0.1f;
 
     private Path path;
@@ -26,31 +37,19 @@ public class EnemyAttack : MonoBehaviour
     Seeker seeker;
     Rigidbody2D enemy;
 
-    [SerializeField]
-    private LayerMask wall;
-
     private float sightRange = 5f;
+
     public bool onSight = false;
 
     public bool shooting = false;
 
-    [SerializeField]
-    private GameObject fireball;
-
-    [SerializeField]
-    private Transform firepoint;
-
     public Vector2 fireDir;
 
-    private float timerStart = 1f;
+    private float timerStart = 1.5f;
 
     private float timer;
 
     private bool seesPlayer;
-
-    [SerializeField]
-    private AudioSource fireSound;
-
 
     public void Start()
     {
