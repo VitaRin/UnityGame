@@ -17,15 +17,12 @@ public class Fireball : MonoBehaviour
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyAttack = enemy.GetComponent<EnemyAttack>();
         rb.velocity = enemyAttack.fireDir * speed;
-        //Debug.Log("JERE");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            
-            //Debug.Log(collision.name);
             enemyAttack.Aim();
             collision.gameObject.GetComponent<PlayerCollide>().Teleport();
             
