@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerCollide : MonoBehaviour
 {
     private Rigidbody2D player;
+    
     private Animator anime;
 
     [SerializeField]
@@ -32,6 +33,9 @@ public class PlayerCollide : MonoBehaviour
 
     [SerializeField]
     private AudioSource fallSound;
+
+    [SerializeField]
+    private Image keyImage;
     
     public bool hasKey = false;
 
@@ -71,6 +75,11 @@ public class PlayerCollide : MonoBehaviour
             Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 0.7f);
             knockback.Feedback(direction, 8f);
         }
+
+        if (collision.gameObject.CompareTag("Door") && hasKey)
+        {
+            keyImage.enabled = false;
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -97,6 +106,7 @@ public class PlayerCollide : MonoBehaviour
             keySound.Play();
             Destroy(collision.gameObject);
             hasKey = true;
+            keyImage.enabled = true;
         }
         if (collision.gameObject.CompareTag("Freefall"))
         {
