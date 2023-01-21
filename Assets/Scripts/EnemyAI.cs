@@ -26,7 +26,7 @@ public class EnemyAI : MonoBehaviour
     private EnemyPatrol enemyPatrol;
 
     [SerializeField]
-    private EnemyAttack enemyAttack;
+    public EnemyAttack enemyAttack;
 
     void Start()
     {

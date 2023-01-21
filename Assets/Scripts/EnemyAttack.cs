@@ -30,13 +30,22 @@ public class EnemyAttack : MonoBehaviour
     private float sightRange = 5f;
     public bool onSight = false;
 
-    private bool shooting;
+    public bool shooting = false;
 
     [SerializeField]
     private GameObject fireball;
 
     [SerializeField]
     private Transform firepoint;
+
+    public Vector2 fireDir;
+
+    private float timerStart = 1f;
+
+    private float timer;
+
+    private bool seesPlayer;
+
 
     public void Start()
     {
@@ -46,51 +55,51 @@ public class EnemyAttack : MonoBehaviour
 
     public void Follow()
     {   
-        if (LookForPlayer())
-        {
-
-            Shoot();
-        }
-        else
-        {
-
+        seesPlayer = LookForPlayer();
         
-            Invoke("UpdatePath", 0f);
-
-            if (path != null)
+            if (seesPlayer)
             {
-                if (currentWaypoint < path.vectorPath.Count)
-                {
-                    Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
-                    isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
-                    
-                    Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - enemy.position).normalized;
-                    Vector2 force = new Vector2(direction.x * 2f, 0f) * speed * Time.deltaTime;
 
-                    // if (direction.y > jumpRequirement && isGrounded)
-                    // {
-                    //     enemy.AddForce(new Vector2(0f, direction.y) * speed * 2.5f);
-                    // }
-                    // else if (direction.y < -0.5f && isGrounded)
-                    // {
-                    //     enemy.AddForce(new Vector2(direction.x, 0f) * 10f);
-                    // }
-
-                    enemy.AddForce(force);
-
-                    float distance = Vector2.Distance(enemy.position, path.vectorPath[currentWaypoint]);
-                    if (distance < nextWaypointDistance)
-                    {
-                        currentWaypoint++;
-                    }
-                }
-                else
-                {
-                    currentWaypoint = 0;
-                }
-                
+                Shoot();
             }
-        }
+            else
+            {
+                Invoke("UpdatePath", 0f);
+
+                if (path != null)
+                {
+                    if (currentWaypoint < path.vectorPath.Count)
+                    {
+                        Vector3 startOffset = transform.position - new Vector3(0f, GetComponent<Collider2D>().bounds.extents.y + jumpCheckOffset);
+                        isGrounded = Physics2D.Raycast(startOffset, -Vector3.up, 0.05f);
+                        
+                        Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - enemy.position).normalized;
+                        Vector2 force = new Vector2(direction.x * 2f, 0f) * speed * Time.deltaTime;
+
+                        if (direction.y > jumpRequirement && isGrounded)
+                        {
+                            enemy.AddForce(new Vector2(0f, direction.y) * speed * 2.5f);
+                        }
+                        else if (direction.y < -0.5f && isGrounded)
+                        {
+                            enemy.AddForce(new Vector2(direction.x, 0f) * 10f);
+                        }
+
+                        enemy.AddForce(force);
+
+                        float distance = Vector2.Distance(enemy.position, path.vectorPath[currentWaypoint]);
+                        if (distance < nextWaypointDistance)
+                        {
+                            currentWaypoint++;
+                        }
+                    }
+                    else
+                    {
+                        currentWaypoint = 0;
+                    }
+                    
+                }
+            }
         enemyAI.AnimationUpdate();
     }
 
@@ -137,6 +146,7 @@ public class EnemyAttack : MonoBehaviour
         if (hit.collider != null && hit.collider.tag == "Player")
         {   
             Debug.DrawLine(transform.position, hit.point, Color.red);
+            fireDir = destination.normalized;
             return true;
         }
         return false;
@@ -144,8 +154,28 @@ public class EnemyAttack : MonoBehaviour
 
     private void Shoot()
     {
-        Instantiate(fireball, firepoint.position, firepoint.rotation);
+        if (!shooting)
+        {
+            Instantiate(fireball, firepoint.position, firepoint.rotation);
+            timer = timerStart;
+            shooting = true;
+        }
+        else
+        {
+            timer -= Time.deltaTime;
+            if (timer <= 0f)
+            {
+                shooting = false;
+            }
+        }
+        // Fireball fb = FindObjectOfType<Fireball>();
+        // fb.Shooting(this);
     }
+
+    // private void Wait()
+    // {
+
+    // }
 
     private bool Aim()
     {
