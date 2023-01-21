@@ -6,7 +6,7 @@ using Pathfinding;
 public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
-    private float sightRange = 1f;
+    private float sightRange = 5f;
 
     [SerializeField]
     private LayerMask rayLayer;
@@ -25,11 +25,11 @@ public class EnemyAI : MonoBehaviour
 
     private bool facingRight = true;
 
-    // [SerializeField]
-    // private AIPath aiPath;
-
     [SerializeField]
     private EnemyPatrol enemyPatrol;
+
+    [SerializeField]
+    private EnemyAttack enemyAttack;
 
     void Start()
     {
@@ -41,13 +41,19 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        
-        enemyPatrol.Patrol();
+        if (DetectPlayer() || enemyAttack.InRange())
+        {
+            enemyAttack.Follow();
+        }
+        else
+        {
+            enemyPatrol.Patrol();
+        }
     }
 
     public bool DetectPlayer()
     {
-        if (player.position.x - transform.position.x > 0 && facingRight || player.position.x - transform.position.x < 0 && !facingRight)
+        if ((player.position.x - transform.position.x) > 0 && facingRight || (player.position.x - transform.position.x) < 0 && !facingRight)
         {
             Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
@@ -60,6 +66,7 @@ public class EnemyAI : MonoBehaviour
             if (hit.collider != null && hit.collider.tag == "Player")
             {   
                 Debug.DrawLine(transform.position, hit.point, Color.red);
+                enemyAttack.onSight = true;
                 return true;
             }
         }
@@ -72,16 +79,16 @@ public class EnemyAI : MonoBehaviour
 
         //Debug.Log(enemy.velocity);
 
-        if (enemy.velocity.x >= 0.01f)
+        if (enemy.velocity.x >= 0.05f)
         {
             idle = false;
-            sprite.flipX = false;
+            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             facingRight = true;
         }
-        else if (enemy.velocity.x <= -0.01f)
+        else if (enemy.velocity.x <= -0.05f)
         {
             idle = false;
-            sprite.flipX = true;
+            transform.localScale = new Vector3(-1f * Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
             facingRight = false;
         }
         else
