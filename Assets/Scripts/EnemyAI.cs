@@ -7,9 +7,6 @@ public class EnemyAI : MonoBehaviour
 {   
     [SerializeField]
     private float sightRange = 5f;
-
-    [SerializeField]
-    private LayerMask rayLayer;
     
     private Transform player;
 
@@ -23,7 +20,7 @@ public class EnemyAI : MonoBehaviour
     
     private Vector2 currentPosition;
 
-    private bool facingRight = true;
+    public bool facingRight = true;
 
     [SerializeField]
     private EnemyPatrol enemyPatrol;
@@ -51,7 +48,7 @@ public class EnemyAI : MonoBehaviour
         }
     }
 
-    public bool DetectPlayer()
+    private bool DetectPlayer()
     {
         if ((player.position.x - transform.position.x) > 0 && facingRight || (player.position.x - transform.position.x) < 0 && !facingRight)
         {
@@ -65,7 +62,7 @@ public class EnemyAI : MonoBehaviour
             
             if (hit.collider != null && hit.collider.tag == "Player")
             {   
-                Debug.DrawLine(transform.position, hit.point, Color.red);
+                //Debug.DrawLine(transform.position, hit.point, Color.red);
                 enemyAttack.onSight = true;
                 return true;
             }
