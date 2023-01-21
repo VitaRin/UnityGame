@@ -48,6 +48,9 @@ public class EnemyAttack : MonoBehaviour
 
     private bool seesPlayer;
 
+    [SerializeField]
+    private AudioSource fireSound;
+
 
     public void Start()
     {
@@ -159,15 +162,13 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!shooting)
         {
-            GameObject fb = Instantiate(fireball, firepoint.position, firepoint.rotation);
-            Debug.Log(fb);
+            Instantiate(fireball, firepoint.position, firepoint.rotation);
             timer = timerStart;
             shooting = true;
-            //Debug.Log("shooting");
+            fireSound.Play();
         }
         else
         {
-            //Debug.Log("waiting to shoot");
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {

@@ -29,6 +29,9 @@ public class PlayerCollide : MonoBehaviour
 
     [SerializeField]
     private AudioSource zappedSound; 
+
+    [SerializeField]
+    private AudioSource fallSound;
     
     public bool hasKey = false;
 
@@ -98,43 +101,17 @@ public class PlayerCollide : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Freefall"))
         {
+            fallSound.Play();
             player.mass = 5f;
             player.gravityScale = 3.72f;
             cameraController.ToggleReverb();
             Invoke("Die", 3f);
         }
-        if (collision.gameObject.CompareTag("Walls"))
-        {
-            // if (teleporting)
-            // {
-            //     Debug.Log("Teleported");
-            //     player.bodyType = RigidbodyType2D.Dynamic;
-            //     anime.SetBool("Teleporting", false);
-            //     teleporting = false;
-            // }
-        }
     }
-
-    // private IEnumerator Knockback(float knockbackDuration, float knockbackPower, Vector3 direction) {
-    //     float timer = 0;
-
-    //     while (knockbackDuration > timer)
-    //     {
-    //         timer += Time.deltaTime;
-    //         player.AddForce(direction);
-    //     }
-
-    //     yield return 0;
-    // }
 
     public void Teleport()
     {
-        anime.SetBool("Teleporting", true);
-        //player.bodyType = RigidbodyType2D.Static;
-        teleporting = true;
         player.transform.position = tpPos;
-        anime.SetBool("Teleporting", false);
-        teleporting = false;
     }
 
     private void Die()
