@@ -40,6 +40,10 @@ public class PlayerCollide : MonoBehaviour
 
     public Knockback knockback;
 
+    public Vector2 tpPos;
+
+    public bool teleporting;
+
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -55,23 +59,15 @@ public class PlayerCollide : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-            GlobalControl.Instance.HP--;
 
-            // anime.SetTrigger("Hit");
-
-            // Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 1.3f);
-            // knockback.Feedback(direction, 7f);
-            // anime.SetInteger("State", 0);
             Die();
         }
 
         if (collision.gameObject.CompareTag("Gate"))
         {
             zappedSound.Play();
-            //anime.SetTrigger("Hit");
             Vector2 direction = new Vector2(player.transform.position.x - collision.gameObject.transform.position.x, 0.7f);
             knockback.Feedback(direction, 8f);
-            //anime.SetInteger("State", 0);
         }
     }
 
@@ -107,6 +103,16 @@ public class PlayerCollide : MonoBehaviour
             cameraController.ToggleReverb();
             Invoke("Die", 3f);
         }
+        if (collision.gameObject.CompareTag("Walls"))
+        {
+            // if (teleporting)
+            // {
+            //     Debug.Log("Teleported");
+            //     player.bodyType = RigidbodyType2D.Dynamic;
+            //     anime.SetBool("Teleporting", false);
+            //     teleporting = false;
+            // }
+        }
     }
 
     // private IEnumerator Knockback(float knockbackDuration, float knockbackPower, Vector3 direction) {
@@ -120,6 +126,16 @@ public class PlayerCollide : MonoBehaviour
 
     //     yield return 0;
     // }
+
+    public void Teleport()
+    {
+        anime.SetBool("Teleporting", true);
+        //player.bodyType = RigidbodyType2D.Static;
+        teleporting = true;
+        player.transform.position = tpPos;
+        anime.SetBool("Teleporting", false);
+        teleporting = false;
+    }
 
     private void Die()
     {

@@ -6,7 +6,9 @@ using Pathfinding;
 public class EnemyAttack : MonoBehaviour
 {
     [SerializeField]
-    public Transform target;
+    public GameObject player;
+    
+    private Transform target;
 
     public EnemyAI enemyAI;
 
@@ -51,6 +53,7 @@ public class EnemyAttack : MonoBehaviour
     {
         seeker = GetComponent<Seeker>();
         enemy = GetComponent<Rigidbody2D>();
+        target = player.transform;
     }
 
     public void Follow()
@@ -156,28 +159,24 @@ public class EnemyAttack : MonoBehaviour
     {
         if (!shooting)
         {
-            Instantiate(fireball, firepoint.position, firepoint.rotation);
+            GameObject fb = Instantiate(fireball, firepoint.position, firepoint.rotation);
+            Debug.Log(fb);
             timer = timerStart;
             shooting = true;
+            //Debug.Log("shooting");
         }
         else
         {
+            //Debug.Log("waiting to shoot");
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
                 shooting = false;
             }
         }
-        // Fireball fb = FindObjectOfType<Fireball>();
-        // fb.Shooting(this);
     }
 
-    // private void Wait()
-    // {
-
-    // }
-
-    private bool Aim()
+    public void Aim()
     {
         Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
@@ -188,8 +187,10 @@ public class EnemyAttack : MonoBehaviour
         if (hit.collider != null && hit.collider.tag == "Walls")
         {   
             Debug.DrawLine(transform.position, hit.point, Color.blue);
-            return true;
+            Vector2 tpDestination = hit.point - ((hit.point - (Vector2)player.transform.position).normalized * 2f);
+            Debug.Log(hit.point);
+            Debug.Log(tpDestination);
+            player.GetComponent<PlayerCollide>().tpPos = tpDestination;
         }
-        return false;
     }
 }

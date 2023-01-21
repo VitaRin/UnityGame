@@ -15,6 +15,7 @@ TagManager:
   - Block
   - Enemy
   - Walls
+  - NonTPWalls
   layers:
   - Default
   - TransparentFX

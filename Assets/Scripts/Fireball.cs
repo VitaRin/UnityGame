@@ -11,17 +11,13 @@ public class Fireball : MonoBehaviour
 
     private EnemyAttack enemyAttack;
 
-    // [SerializeField]
-    // private GameObject enemy;
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         GameObject enemy = GameObject.FindGameObjectWithTag("Enemy");
         enemyAttack = enemy.GetComponent<EnemyAttack>();
         rb.velocity = enemyAttack.fireDir * speed;
-        //enemyAttack.shooting = true;
+        //Debug.Log("JERE");
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -29,8 +25,14 @@ public class Fireball : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             
-            Debug.Log(collision.name);
+            //Debug.Log(collision.name);
+            enemyAttack.Aim();
+            collision.gameObject.GetComponent<PlayerCollide>().Teleport();
+            
         }
-        //enemyAttack.shooting = false;
+        if (!collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
