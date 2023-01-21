@@ -126,6 +126,9 @@ public class EnemyAttack : MonoBehaviour
 
     public bool InRange()
     {
+        // If the enemy sees the player, it starts following them whether they're in sight or not
+        // as long as the player is in range.
+
         if (onSight)
         {
             if (Vector2.Distance(transform.position, target.transform.position) < 10f)
@@ -142,6 +145,8 @@ public class EnemyAttack : MonoBehaviour
 
     private bool LookForPlayer()
     {
+        // Have a fixed aim where to fire the fireball.
+
         Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
         Vector2 destination = new Vector2(target.position.x - transform.position.x, target.position.y - transform.position.y - 0.5f);
@@ -168,6 +173,8 @@ public class EnemyAttack : MonoBehaviour
         }
         else
         {
+            // Delay to avoid fireball spam.
+
             timer -= Time.deltaTime;
             if (timer <= 0f)
             {
@@ -178,6 +185,8 @@ public class EnemyAttack : MonoBehaviour
 
     public void Aim()
     {
+        // Aim for a random wall where to teleport the player.
+
         Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
         Vector2 destination = new Vector2(Random.Range(-17, 35), Random.Range(-1, 21));
@@ -187,6 +196,8 @@ public class EnemyAttack : MonoBehaviour
         if (hit.collider != null && hit.collider.tag == "Walls")
         {   
             Debug.DrawLine(transform.position, hit.point, Color.blue);
+            
+            // To avoid being stuck in walls.
             Vector2 tpDestination = hit.point - ((hit.point - (Vector2)player.transform.position).normalized * 2f);
             Debug.Log(hit.point);
             Debug.Log(tpDestination);

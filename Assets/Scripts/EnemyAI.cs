@@ -41,6 +41,9 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Chooses whether to patrol between waypoints or try to shoot the player based on whether 
+        // the player is in sight or not.
+
         if (DetectPlayer() || enemyAttack.InRange())
         {
             enemyAttack.Follow();
@@ -66,8 +69,6 @@ public class EnemyAI : MonoBehaviour
             Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
             Vector2 target = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y - 0.5f);
-
-            
             
             RaycastHit2D hit = Physics2D.Raycast(source, target, sightRange);
             

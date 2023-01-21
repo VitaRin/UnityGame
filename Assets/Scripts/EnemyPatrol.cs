@@ -83,6 +83,8 @@ public class EnemyPatrol : MonoBehaviour
         {
             if (pathComplete)
             {
+                // Wait in each patrol point for some time.
+                
                 if (waitTime <= 0)
                 {
                     currentWaypointIndex++;
