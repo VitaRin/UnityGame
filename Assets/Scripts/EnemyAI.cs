@@ -25,8 +25,11 @@ public class EnemyAI : MonoBehaviour
 
     private bool facingRight = true;
 
+    // [SerializeField]
+    // private AIPath aiPath;
+
     [SerializeField]
-    private AIPath aiPath;
+    private EnemyPatrol enemyPatrol;
 
     void Start()
     {
@@ -38,7 +41,8 @@ public class EnemyAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        currentPosition = transform.position;
+        
+        enemyPatrol.Patrol();
     }
 
     public bool DetectPlayer()
@@ -47,7 +51,7 @@ public class EnemyAI : MonoBehaviour
         {
             Vector2 source = new Vector2(transform.position.x, transform.position.y + 0.5f);
 
-            Vector2 target = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y -0.5f);
+            Vector2 target = new Vector2(player.position.x - transform.position.x, player.position.y - transform.position.y - 0.5f);
 
             
             
@@ -66,13 +70,15 @@ public class EnemyAI : MonoBehaviour
     {
         bool idle;
 
-        if (aiPath.desiredVelocity.x >= 0.01f)
+        //Debug.Log(enemy.velocity);
+
+        if (enemy.velocity.x >= 0.01f)
         {
             idle = false;
             sprite.flipX = false;
             facingRight = true;
         }
-        else if (aiPath.desiredVelocity.x <= -0.01f)
+        else if (enemy.velocity.x <= -0.01f)
         {
             idle = false;
             sprite.flipX = true;

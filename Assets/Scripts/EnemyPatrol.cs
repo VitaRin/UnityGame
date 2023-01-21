@@ -9,6 +9,8 @@ public class EnemyPatrol : MonoBehaviour
     private GameObject[] waypoints;
 
     private int currentWaypointIndex = 0;
+    
+    private int currentWaypoint = 0;
 
     private float startWaitTime = 1f;
 
@@ -22,9 +24,11 @@ public class EnemyPatrol : MonoBehaviour
 
     private Rigidbody2D enemy;
 
-    private AIDestinationSetter destinationSetter;
-
     private Transform target;
+
+    private float nextWaypointDistance = 0.5f;
+
+    private bool pathComplete = false;
 
 
     void Start()
@@ -32,24 +36,40 @@ public class EnemyPatrol : MonoBehaviour
         waitTime = startWaitTime;
         seeker = GetComponent<Seeker>();
         enemy = GetComponent<Rigidbody2D>();
-        destinationSetter = GetComponent<AIDestinationSetter>();
     }
 
-    void FixedUpdate()
+    public void Patrol()
     {
-        if (enemyAI.DetectPlayer() == false)
+        Invoke("UpdatePath", 0f);
+
+        if (path != null)
         {
-            Invoke("UpdatePath", 0f);    
-        }
+            if (currentWaypoint < path.vectorPath.Count)
+            {        
+                Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - enemy.position).normalized;
+                Vector2 force = new Vector2(direction.x * 2f, 0f) * 1000f * Time.deltaTime;
+
+                enemy.AddForce(force);
+
+                float distance = Vector2.Distance(enemy.position, path.vectorPath[currentWaypoint]);
+
+                if (distance < nextWaypointDistance)
+                {
+                    currentWaypoint++;
+                }
+            }
+            else
+            {
+                pathComplete = true;
+            }
+        }     
 
         enemyAI.AnimationUpdate();
-
     }
 
     void UpdatePath()
     {
-        destinationSetter.target = waypoints[currentWaypointIndex].transform;
-        target = destinationSetter.target;
+        target = waypoints[currentWaypointIndex].transform;
 
         if (seeker.IsDone())
         {
@@ -61,21 +81,25 @@ public class EnemyPatrol : MonoBehaviour
     {
         if (!p.error)
         {
-            
-            if (waitTime <= 0)
+            if (pathComplete)
             {
-                currentWaypointIndex++;
-                waitTime = startWaitTime;
-
-                if (currentWaypointIndex >= waypoints.Length)
+                if (waitTime <= 0)
                 {
-                    currentWaypointIndex = 0;
+                    currentWaypointIndex++;
+                    waitTime = startWaitTime;
+                    pathComplete = false;
+                    currentWaypoint = 0;
+
+                    if (currentWaypointIndex >= waypoints.Length)
+                    {
+                        currentWaypointIndex = 0;
+                    }
+                    
                 }
-                
-            }
-            else
-            {
-                waitTime -= Time.deltaTime;
+                else
+                {
+                    waitTime -= Time.deltaTime;
+                }
             }
             path = p;
         }
